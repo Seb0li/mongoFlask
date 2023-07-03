@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask</title>
+</head>
+<body>
+    <form action="/formulaires" method="POST">
+        <p>
+            <!-- champ texte pour nom -->
+            <label for="nom">Nom : </label>
+            <input type="text" name="nom" value="{{ nom }}" id="nom" required>
+        </p>
+        <p>
+            <!-- champ texte pour prénom -->
+            <label for="prenom">Prenom : </label>
+            <input type="text" name="prenom" value="{{ prenom }}" id="prenom" required>
+        </p>
+        <p>
+             <!-- champ texte pour email -->
+            <label for="email">Email : </label>
+            <input type="email" name="email" value="{{ email }}" id="email" required>
+        </p>
+        <p>
+            <!-- choix "radio" pour genre -->
+            Genre :
+            <input type="radio" name="choix-genre" value="Homme" id="choix1" required>
+            <label for="choix1">Homme</label>
+            <input type="radio" name="choix-genre" value="Femme" id="choix2">
+            <label for="choix2">Femme</label>
+            <input type="radio" name="choix-genre" value="LGHDTV" id="choix3">
+            <label for="choix3">LGHDTV</label>
+        </p>
+        <p>
+            <!-- choix liste de pays -->
+            <label for="pays">Pays : </label>
+            <select name="pays" id="pays" value="{{ pays }}" required>
+                <option value="" selected disabled hidden>Choisissez un pays</option>
+                {% for country in countries %}
+                <option value="{{ country }}">{{ country }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>
+            <!-- choix "checkbox" -->
+            <label>Sujet : </label><br>
+            <input type="checkbox" name="choix-sujet" value="reparation"> Reparation<br>
+            <input type="checkbox" name="choix-sujet" value="commande"> Commande<br>
+            <input type="checkbox" name="choix-sujet" value="autre" checked> Autre<br>
+        </p>
+        <p>
+            <!-- grande zone texte 6x50 -->
+            <label for="commentaire">Écrire un commentaire : </label>
+            <textarea name="commentaire" id="commentaire" rows="6" cols="50" required>{{ commentaire }}</textarea>
+        </p>
+        <p>
+            <!-- submit buttonnnnn -->
+            <input type="submit" value="Envoyer le formulaire">
+        </p>
+    </form>
+
+    {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>
